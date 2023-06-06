@@ -1,22 +1,46 @@
-import { TextInput, View, StyleSheet } from 'react-native'
-import PrimaryButton from '../components/PrimaryButton'
+import { TextInput, View, StyleSheet, Alert } from 'react-native'
+import PrimaryButton from '../components/ui/PrimaryButton'
+import Colors from '../constants/colors'
+import { useState } from 'react'
 
-function StartGameScreen () {
+function StartGameScreen ({ onPickNumber }) {
+  const [enteredNumber, setEnterNumber] = useState('')
+
+  function numberInputHandler (enteredText) {
+    setEnterNumber(enteredText)
+  }
+
+  function resetInputHandler () {
+    setEnterNumber('')
+  }
+
+  function confirmInputHandler () {
+    const chosenNumber = parseInt(enteredNumber)
+
+    if (isNaN(chosenNumber) || chosenNumber <= 0 || chosenNumber > 99) {
+      Alert.alert('Invalid Number', 'Number has to be between 1 and 99.', [
+        { text: 'Okay', style: 'destructive', onPress: resetInputHandler }
+      ])
+    }
+    onPickNumber(chosenNumber)
+  }
   return (
     <View style={styles.inputContainer}>
       <TextInput
-        style={styles.numberInput}
-        maxLength={2}
-        keyboardType='number-pad'
         autoCapitalize='none'
         autoCorrect={false}
+        keyboardType='number-pad'
+        maxLength={2}
+        onChangeText={numberInputHandler}
+        style={styles.numberInput}
+        value={enteredNumber}
       />
       <View style={styles.buttonsContainer}>
         <View style={styles.buttonContainer}>
-          <PrimaryButton>Reset</PrimaryButton>
+          <PrimaryButton onPress={resetInputHandler}>Reset</PrimaryButton>
         </View>
         <View style={styles.buttonContainer}>
-          <PrimaryButton>Confirm</PrimaryButton>
+          <PrimaryButton onPress={confirmInputHandler}>Confirm</PrimaryButton>
         </View>
       </View>
     </View>
@@ -27,7 +51,7 @@ const styles = StyleSheet.create({
   inputContainer: {
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#3b021f',
+    backgroundColor: Colors.primary800,
     borderRadius: 8,
     elevation: 4,
     marginHorizontal: 24,
@@ -45,9 +69,9 @@ const styles = StyleSheet.create({
     flex: 1
   },
   numberInput: {
-    borderBottomColor: '#ddb52f',
+    borderBottomColor: Colors.accent500,
     borderBottomWidth: 2,
-    color: '#ddb52f',
+    color: Colors.accent500,
     fontSize: 32,
     fontWeight: 'bold',
     height: 50,
