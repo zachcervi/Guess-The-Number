@@ -5,6 +5,7 @@ This is a simple game app where the user enters in a number. The computer then g
 # Screenshots
 
 iPhone
+
 ![Screenshot](iPhone1.png)
 ![Screenshot](iPhone2.png)
 ![Screenshot](iPhone3.png)
@@ -14,8 +15,8 @@ iPhone
 
 Android
 
-![Screenshot](Android1.png)
-![Screenshot](Android2.png)
-![Screenshot](Android3.png)
-![Screenshot](Android4.png)
-![Screenshot](Android5.png)
+![Screenshot](android1.png)
+![Screenshot](android2.png)
+![Screenshot](android3.png)
+![Screenshot](android4.png)
+![Screenshot](android5.png)
